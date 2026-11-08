@@ -32,7 +32,12 @@ await tts.downloadModel(directory, model.files, (p) => {
 });
 console.log("[download] complete and verified");
 
-const result = await speak.synthesizeSpeech({ text, language, voice: language === "zh" ? "zf_001" : language === "en" ? "af_heart" : language === "fr" ? "ff_siwis" : "im_nicola", speed: 1, device: "auto" });
+// The voice comes from the same default table the app uses, so a missing
+// language branch here can never send a wrong-engine voice again.
+const { SPEECH_LANGUAGES } = await import("../src/core/index.ts");
+const defaultVoice = SPEECH_LANGUAGES.find((l) => l.id === language)?.voice;
+if (!defaultVoice) throw new Error(`no default voice for language ${language}`);
+const result = await speak.synthesizeSpeech({ text, language, voice: defaultVoice, speed: 1, device: "auto" });
 const bytes = Math.round((result.audio.length * 3) / 4);
 console.log(`[speak] ${bytes} bytes WAV at ${result.sampleRate} Hz on ${result.device}`);
 await (await import("node:fs/promises")).writeFile(path.join(root, `data/tts/out-${language}.wav`), Buffer.from(result.audio, "base64"));
