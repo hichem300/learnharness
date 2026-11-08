@@ -188,7 +188,9 @@ publish:
   # would be a leak. desktop:dist passes no --publish flag, so builds never
   # upload; publishing happens at release time (GH_TOKEN + --publish).
   - provider: github
-    owner: amosblomqvist
+    # The feature fork publishes its own releases; the upstream repo is
+    # read-only for this checkout.
+    owner: hichem300
     repo: learnharness
     # All three CI jobs contribute assets; only the owner publishes it.
     releaseType: draft
