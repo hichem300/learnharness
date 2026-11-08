@@ -64,9 +64,12 @@ export function SpeechSettingsSection() {
 	return (
 		<div data-testid="speech-section" className="flex flex-col gap-3">
 			<SettingsRow label="Language">
+				{/* dir=auto: the Arabic option's own text decides its direction
+				inside the closed control, without flipping the whole row. */}
 				<ThinSelect
 					ariaLabel="Speech language"
 					testid="speech-language"
+					dir="auto"
 					value={preference.language}
 					onChange={(value) => {
 						const language = SPEECH_LANGUAGES.find((l) => l.id === value);

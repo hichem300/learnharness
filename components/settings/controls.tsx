@@ -177,6 +177,7 @@ export function ThinSelect({
 	ariaLabel,
 	testid,
 	disabled,
+	dir,
 }: {
 	value: string;
 	onChange: (next: string) => void;
@@ -184,10 +185,13 @@ export function ThinSelect({
 	ariaLabel: string;
 	testid?: string;
 	disabled?: boolean;
+	/** Lets a value's own script pick its direction (Arabic labels). */
+	dir?: "ltr" | "rtl" | "auto";
 }) {
 	return (
 		<select
 			value={value}
+			dir={dir}
 			aria-label={ariaLabel}
 			data-testid={testid}
 			disabled={disabled}
