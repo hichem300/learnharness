@@ -15,8 +15,11 @@ const WORKER_SCRIPT = path.join(resolveRuntimeDir(), "worker.py");
  * fail fast here instead of corrupting the line-delimited stream. */
 const MAX_LINE_BYTES = 16 * 1024;
 /** No speech request should hang a browser tab forever; a stuck worker is
- * killed and the caller gets a clear error instead of a silent stall. */
-const REQUEST_TIMEOUT_MS = 120_000;
+ * killed and the caller gets a clear error instead of a silent stall.
+ * Ten minutes: Habibi's FIRST request on CPU both loads a 1.35 GB model
+ * and runs the inference — measured in CI to exceed two minutes; later
+ * requests on the warm worker come back in seconds. */
+const REQUEST_TIMEOUT_MS = 600_000;
 /** A warm model worth keeping loaded, but not indefinitely once the chat
  * using it moves on; this frees RAM the next time nothing is speaking. */
 const IDLE_SHUTDOWN_MS = 10 * 60_000;
