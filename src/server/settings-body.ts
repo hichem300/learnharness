@@ -32,6 +32,7 @@ import { WRITABLE_TOOL_KEYS } from "../core/pending.ts";
 import { isSearchEngineId, SEARCH_ENGINES } from "../core/search.ts";
 import { isDictationLanguage } from "../core/dictation.ts";
 import { parseFileAccessSettings } from "../core/file-access.ts";
+import { parseSpeechPreferences, type SpeechPreferences } from "../core/tts.ts";
 
 /** Parsed-or-rejected — `ok: false` carries the 400's error message. */
 export type SettingsBodyResult<T> =
@@ -416,6 +417,14 @@ export function parseDictationSettingsBody(body: unknown): SettingsBodyResult<Di
 	return { ok: true, settings: { language: raw.language } };
 }
 
+/** Read-aloud preferences (#tts): whole-object replace, same as every
+ *  other section — a bad shape is a plain 400, not a partial merge. */
+export function parseSpeechSettingsBody(body: unknown): SettingsBodyResult<SpeechPreferences> {
+	const parsed = parseSpeechPreferences(body);
+	if (!parsed) return { ok: false, error: "Invalid speech settings" };
+	return { ok: true, settings: parsed };
+}
+
 /** The custom endpoint's per-model pins (PATCH /api/custom-provider): the
  *  whole desired map, replace-whole like every section. Strict write side — a
  *  token count must be a whole number at or above the floor (the read side
@@ -467,6 +476,7 @@ export const SETTINGS_SECTIONS = {
 	models: parseModelsSettingsBody,
 	dictation: parseDictationSettingsBody,
 	claudeCode: parseClaudeCodeSettingsBody,
+	speech: parseSpeechSettingsBody,
 } as const;
 
 export type SettingsSectionName = keyof typeof SETTINGS_SECTIONS;

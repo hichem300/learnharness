@@ -1,0 +1,5 @@
+# Shared Habibi dependencies. setup.mjs adds pinned CPU or CUDA PyTorch wheels.
+# One hash lock cannot represent both mutually exclusive PyTorch indexes.
+habibi-tts==0.1.1
+f5-tts==1.1.22
+imageio-ffmpeg==0.8.1

@@ -1,0 +1,83 @@
+{
+  "models": [
+    {
+      "id": "kokoro",
+      "label": "Kokoro v1.0 (English, int8)",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "files": [
+        {
+          "path": "model.onnx",
+          "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.0.int8.onnx",
+          "size": 114119327,
+          "sha256": "ae315a79b623f244700e4afb9246c46a26066782e049ba174bf3ba433970ee9c"
+        },
+        {
+          "path": "voices.bin",
+          "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.0.bin",
+          "size": 28214398,
+          "sha256": "bca610b8308e8d99f32e6fe4197e7ec01679264efed0cac9140fe9c29f1fbf7d"
+        }
+      ]
+    },
+    {
+      "id": "kokoro-zh",
+      "label": "Kokoro v1.1-zh (Chinese, int8)",
+      "license": "Apache-2.0",
+      "licenseUrl": "https://huggingface.co/hexgrad/Kokoro-82M",
+      "files": [
+        {
+          "path": "model.onnx",
+          "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/kokoro-v1.1-zh.int8.onnx",
+          "size": 114120125,
+          "sha256": "11751c087b4bbeed031e2b687b11dda698bd27ba0509472f960b57f835a999f7"
+        },
+        {
+          "path": "voices.bin",
+          "url": "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.1/voices-v1.1-zh.bin",
+          "size": 53815880,
+          "sha256": "14cb6186c99e4f6016871405f62046c5df863ae27465cbdc4ee08be7dd703acd"
+        }
+      ]
+    },
+    {
+      "id": "habibi",
+      "label": "Habibi-TTS Unified (Arabic dialects)",
+      "license": "CC-BY-NC-SA-4.0",
+      "licenseUrl": "https://huggingface.co/SWivid/Habibi-TTS",
+      "referenceText": "أنيا هكا باغية ناكل هكا أني ن نشوف فيها الحاجة هذيكا.",
+      "files": [
+        {
+          "path": "model.safetensors",
+          "url": "https://huggingface.co/SWivid/Habibi-TTS/resolve/3ad11a152851245c002156526c5e1d0b12f2b9d5/Unified/model_200000.safetensors",
+          "size": 1348814641,
+          "sha256": "4024a4f9ca2217fdec6901181c67abcaf7c045da2bc7ae250d89ffaca73334d0"
+        },
+        {
+          "path": "vocab.txt",
+          "url": "https://huggingface.co/SWivid/Habibi-TTS/resolve/3ad11a152851245c002156526c5e1d0b12f2b9d5/Unified/vocab.txt",
+          "size": 11920,
+          "sha256": "49b8f3f126a0cb8146cd5a974cd48866acc4b292f8b59546fd51957f83251d5b"
+        },
+        {
+          "path": "vocos/config.yaml",
+          "url": "https://huggingface.co/charactr/vocos-mel-24khz/resolve/0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21/config.yaml",
+          "size": 461,
+          "sha256": "da9033922f969a47f0c160010226919e59f27761fd5066f3828d46de6650b0fc"
+        },
+        {
+          "path": "vocos/pytorch_model.bin",
+          "url": "https://huggingface.co/charactr/vocos-mel-24khz/resolve/0feb3fdd929bcd6649e0e7c5a688cf7dd012ef21/pytorch_model.bin",
+          "size": 54365991,
+          "sha256": "97ec976ad1fd67a33ab2682d29c0ac7df85234fae875aefcc5fb215681a91b2a"
+        },
+        {
+          "path": "reference.wav",
+          "url": "https://raw.githubusercontent.com/SWivid/Habibi-TTS/9274498d8425b946866cfec1f6eee4841a9d80f3/src/habibi_tts/assets/ALG.wav",
+          "size": 294174,
+          "sha256": "187b5992f7b068371f2769860a8b776e50abcc4168d9d24811ebb97ec0b8664f"
+        }
+      ]
+    }
+  ]
+}

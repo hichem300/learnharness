@@ -7,6 +7,7 @@ import { Hint } from "@/components/ui/hint";
 import { deepgramListenUrl, type DictationLanguage } from "@/src/core";
 import { useDictationLanguage } from "@/components/dictation-preference";
 import { setDictationActive } from "@/components/dictation-state";
+import { stopSpeech } from "@/components/speech-playback";
 export { isDictationActive } from "@/components/dictation-state";
 
 /**
@@ -431,6 +432,9 @@ export function useDictation({ append }: { append: (text: string) => void }): Di
 	);
 
 	const start = useCallback(async () => {
+		// Reading aloud and listening are both single-device audio: starting
+		// the mic silences any message currently speaking.
+		stopSpeech();
 		setDictationActive(true);
 		setError(null);
 		setPhase("connecting");

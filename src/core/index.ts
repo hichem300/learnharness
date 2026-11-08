@@ -68,6 +68,8 @@ export * from "./fuzzy.ts";
 export * from "./settings.ts";
 export * from "./file-access.ts";
 export * from "./dictation.ts";
+export * from "./tts.ts";
+export * from "./speech-text.ts";
 // graph-deletion.ts (wave 6): the whole module is PURE but storage-port
 // driven — the deletion RUNS server-side only. The shell needs exactly one
 // two type-only things from it: the ChatDeleteMode union (the delete

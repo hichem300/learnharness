@@ -14,6 +14,7 @@ import {
 	ConversationScrollButton,
 } from "@/components/ai-elements/conversation";
 import { Message, MessageContent, MessageResponse } from "@/components/ai-elements/message";
+import { SpeakButton } from "@/components/speak-button";
 import { PathText } from "@/components/file-path-chip";
 import { Reasoning, ReasoningContent, ReasoningTrigger } from "@/components/ai-elements/reasoning";
 import { Shimmer } from "@/components/ai-elements/shimmer";
@@ -1560,6 +1561,9 @@ export function Chat({
 														return (
 															<div key={part.id || pi} id={anchor} data-source-message-id={sourceId ?? undefined} className="lh-source-passage">
 																<MessageResponse>{part.text}</MessageResponse>
+																{/* One quiet read-aloud control per assistant message; the
+																one-speaker and dictation rules live in speech-playback. */}
+																{part.text && <SpeakButton messageId={m.id} markdown={part.text} />}
 															</div>
 														);
 													}

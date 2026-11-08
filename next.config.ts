@@ -106,6 +106,11 @@ const nextConfig: NextConfig = {
 			"node_modules/gcp-metadata/**/*",
 			"node_modules/json-bigint/**/*",
 			"node_modules/bignumber.js/**/*",
+			// Local speech (#tts): the Python worker script, pinned requirements
+			// and the trusted download manifest are runtime assets the server
+			// reads from disk next to the bundled code — the tracer cannot see
+			// fs.readFile() targets.
+			"runtime/tts/**/*",
 		],
 	},
 	// Framework-free core lives in src/ (plain TS, imported by routes and CLI alike).

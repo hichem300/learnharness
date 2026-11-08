@@ -37,6 +37,7 @@ import type { ChatSettings } from "./contracts/chat.ts";
 import { isSearchEngineId, type SearchEngineId } from "./search.ts";
 import { isDictationLanguage, type DictationLanguage } from "./dictation.ts";
 import { parseFileAccessSettings, type FileAccessSettings } from "./file-access.ts";
+import { parseSpeechPreferences, type SpeechPreferences } from "./tts.ts";
 
 /** The schema version this code understands. Bump ONLY for breaking shape
  *  changes (a field renamed/meaning changed); pure additions never bump. */
@@ -484,6 +485,8 @@ export interface UserSettings {
 	appearance?: AppearanceSettings;
 	graph?: GraphSettings;
 	compaction?: CompactionSettings;
+	/** Read-aloud language/voice/speed/device (#tts). Absent = English, auto. */
+	speech?: SpeechPreferences;
 	[key: string]: unknown;
 }
 
@@ -832,6 +835,10 @@ export function sanitizeUserSettings(raw: unknown): UserSettings | null {
 		out.claudeCode = raw !== null && typeof raw === "object" && !Array.isArray(raw)
 			&& typeof (raw as Record<string, unknown>).enabled === "boolean"
 			? { enabled: (raw as { enabled: boolean }).enabled } : {};
+	}
+	if (r.speech !== undefined) {
+		const speech = parseSpeechPreferences(r.speech);
+		if (speech) out.speech = speech;
 	}
 	if (r.agent !== null && typeof r.agent === "object" && !Array.isArray(r.agent)) {
 		out.agent = sanitizeAgent(r.agent as Record<string, unknown>);
