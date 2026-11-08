@@ -1,0 +1,54 @@
+name: Speech end-to-end
+
+# Real synthesis proof (#tts): installs the managed runtime, downloads
+# each model from its official source with hash verification, and
+# synthesizes one sentence per language through the real worker process.
+# WAV files are uploaded as artifacts so a human can listen. Manual
+# dispatch only: it downloads gigabytes and is not needed on every push.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+
+jobs:
+  linux:
+    name: Synthesize (${{ matrix.model }})
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - model: kokoro
+            language: en
+            text: "Welcome to LearnHarness."
+          - model: kokoro
+            language: fr
+            text: "Bonjour, bienvenue dans LearnHarness."
+          - model: kokoro
+            language: it
+            text: "Ciao, benvenuto in LearnHarness."
+          - model: kokoro-zh
+            language: zh
+            text: "你好，欢迎来到学习工具。"
+          - model: habibi
+            language: ar
+            text: "مرحبا. هيا نتعلم شيئا جديدا."
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: "26"
+      - run: npm ci
+      - name: Install, download, and synthesize
+        run: npx tsx scripts/tts-e2e.mjs ${{ matrix.model }} "${{ matrix.text }}" ${{ matrix.language }}
+      - uses: actions/upload-artifact@v7
+        with:
+          name: speech-${{ matrix.language }}
+          retention-days: 7
+          if-no-files-found: error
+          path: data/tts/out-*.wav

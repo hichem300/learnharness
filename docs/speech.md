@@ -29,10 +29,9 @@ Model sizes are about 310 MB for Kokoro in total and about 1.4 GB for Habibi.
 
 Habibi can run on a GPU or a CPU. The device choices are **Automatic**, **CPU**, and **GPU**.
 
-- **GPU** is faster, but only with an NVIDIA card and CUDA. With no NVIDIA CUDA support, GPU mode will not work.
+- **Automatic** only picks the GPU when it detects working NVIDIA CUDA support; otherwise it uses the CPU. You do not have to guess.
 - **CPU** works on any machine, but it is slower.
-
-If Automatic picks GPU on a machine without the right NVIDIA setup, switch it to CPU.
+- If you pick **GPU** on a machine without NVIDIA CUDA, the app tells you clearly and does not pretend it worked.
 
 ## Dictation and speech
 
